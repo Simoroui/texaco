@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { withBasePath } from './BasePath';
 
 const slides = [
   {
@@ -67,7 +68,7 @@ const Hero = () => {
 
   const getBackgroundStyle = (slideIndex: number) => {
     return {
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${slides[slideIndex].imageSrc}')`,
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${withBasePath(slides[slideIndex].imageSrc)}')`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     };

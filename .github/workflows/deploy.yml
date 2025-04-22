@@ -29,8 +29,16 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: npm ci
+      - name: Debug npm and node versions
+        run: |
+          node --version
+          npm --version
+      - name: Debug file structure
+        run: ls -la
       - name: Build with Next.js
         run: npm run build
+      - name: Debug build output
+        run: ls -la out
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

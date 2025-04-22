@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { withBasePath } from '@/components/BasePath';
 
 const disciplines = [
   {
@@ -52,7 +53,7 @@ export default function DisciplinesPage() {
           <div key={discipline.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div 
               className="h-48 bg-cover bg-center"
-              style={{ backgroundImage: `url(${discipline.imagePath})` }}
+              style={{ backgroundImage: `url(${withBasePath(discipline.imagePath)})` }}
             />
             <div className="p-6">
               <h2 className="text-2xl font-bold mb-2">{discipline.title}</h2>

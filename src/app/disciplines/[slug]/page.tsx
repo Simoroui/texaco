@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { withBasePath } from '@/components/BasePath';
 
 // Données fictives pour les disciplines
 const disciplinesData = {
@@ -35,6 +36,13 @@ const disciplinesData = {
   }
 };
 
+// Cette fonction est nécessaire pour le mode export static de Next.js
+export function generateStaticParams() {
+  return Object.keys(disciplinesData).map(slug => ({
+    slug: slug
+  }));
+}
+
 // Type pour les paramètres de page
 type DisciplinePageProps = {
   params: {
@@ -68,7 +76,7 @@ export default function DisciplinePage({ params }: DisciplinePageProps) {
         <div className="w-full h-64 md:h-96 relative my-8 rounded-lg overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${discipline.imagePath})` }}
+            style={{ backgroundImage: `url(${withBasePath(discipline.imagePath)})` }}
           />
         </div>
         
