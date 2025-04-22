@@ -39,64 +39,29 @@ const disciplinesData = {
 // Cette fonction est nécessaire pour le mode export static de Next.js
 export function generateStaticParams() {
   return Object.keys(disciplinesData).map(slug => ({
-    slug: slug
+    slug
   }));
 }
 
-// Type pour les paramètres de page
-type DisciplinePageProps = {
-  params: {
-    slug: string
-  }
-};
-
-export default function DisciplinePage({ params }: DisciplinePageProps) {
+export default function DisciplinePage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const discipline = disciplinesData[slug as keyof typeof disciplinesData];
 
-  // Si la discipline n'existe pas, afficher une page d'erreur
   if (!discipline) {
     return (
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-3xl font-bold mb-6">Discipline non trouvée</h1>
-        <p className="mb-8">La discipline que vous recherchez n'existe pas.</p>
-        <Link href="/disciplines" className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-          Retour aux disciplines
-        </Link>
+        <Link href="/disciplines">Retour aux disciplines</Link>
       </div>
     );
   }
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-2">{discipline.title}</h1>
-        <h2 className="text-xl md:text-2xl text-red-600 mb-6">{discipline.subtitle}</h2>
-        
-        <div className="w-full h-64 md:h-96 relative my-8 rounded-lg overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${withBasePath(discipline.imagePath)})` }}
-          />
-        </div>
-        
-        <div className="prose prose-lg max-w-none">
-          <p className="text-lg mb-6">{discipline.description}</p>
-          
-          {/* Ajoutez ici plus de contenu spécifique à chaque discipline */}
-          <h3 className="text-2xl font-semibold mt-8 mb-4">Événements à venir</h3>
-          <p>Consultez notre calendrier des événements pour voir quand notre équipe participera aux prochaines compétitions.</p>
-          
-          <h3 className="text-2xl font-semibold mt-8 mb-4">Nos pilotes</h3>
-          <p>Découvrez les pilotes spécialisés dans cette discipline.</p>
-          
-          <div className="mt-8">
-            <Link href="/disciplines" className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-              Toutes les disciplines
-            </Link>
-          </div>
-        </div>
-      </div>
+      <h1 className="text-4xl font-bold mb-2">{discipline.title}</h1>
+      <h2 className="text-2xl text-red-600 mb-6">{discipline.subtitle}</h2>
+      <p className="mb-6">{discipline.description}</p>
+      <Link href="/disciplines">Retour aux disciplines</Link>
     </div>
   );
 } 

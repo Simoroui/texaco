@@ -18,27 +18,42 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Setup Node
+      
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - name: Setup Pages
+      
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
+      
       - name: Install dependencies
         run: npm ci
-      - name: Debug npm and node versions
+      
+      - name: Debug - Show environment info
         run: |
-          node --version
-          npm --version
-      - name: Debug file structure
-        run: ls -la
+          echo "Node version: $(node --version)"
+          echo "NPM version: $(npm --version)"
+          echo "Current directory: $(pwd)"
+          echo "Files in current directory:"
+          ls -la
+      
       - name: Build with Next.js
-        run: npm run build
-      - name: Debug build output
-        run: ls -la out
+        run: |
+          echo "Starting Next.js build..."
+          npm run build
+          echo "Build completed, checking output..."
+      
+      - name: Debug - Show build output
+        run: |
+          echo "Files in out directory:"
+          ls -la out || echo "out directory does not exist"
+          echo "Files in .next directory:"
+          ls -la .next || echo ".next directory does not exist"
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
