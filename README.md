@@ -1,3 +1,20 @@
+# Texaco Racing Team Website
+
+Site web officiel de l'équipe de course Texaco.
+
+## Développement local
+
+```bash
+npm install
+npm run dev
+```
+
+## Déploiement
+
+Le site est déployé automatiquement sur GitHub Pages via GitHub Actions lorsque des modifications sont poussées sur la branche master.
+
+URL du site : https://simoroui.github.io/texaco/
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
